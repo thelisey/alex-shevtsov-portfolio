@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Alex Shevtsov</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background-color: #0D015F; color: #ffffff; font-family: 'Inter Tight', sans-serif; line-height: 1.6; }
+    body { overflow-x: hidden; }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #0D015F;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left a {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .header-left a:hover {
+      color: #888888;
+    }
+
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background-color: #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    /* Navigation Overlay */
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 10, 46, 0.98);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-overlay nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .nav-overlay a {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-overlay a:hover {
+      color: #ffffff;
+    }
+
+    .nav-overlay a.active {
+      color: #ffffff;
+    }
+
+    .nav-icons {
+      margin-top: 3rem;
+    }
+
+    .nav-icons a {
+      display: inline-block;
+    }
+
+    .nav-icons svg {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.6);
+      stroke-width: 1.5;
+      transition: stroke 0.3s ease;
+    }
+
+    .nav-icons a:hover svg {
+      stroke: #ffffff;
+    }
+
+    main { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; }
+    .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-heading { font-family: 'Inter Tight', sans-serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 1.5rem; line-height: 1.3; }
+    .about-text { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.9; }
+    .about-text p { margin-bottom: 1.2rem; }
+    .about-image { border-radius: 2px; overflow: hidden; background: #12123a; }
+    .about-image img { width: 100%; height: auto; display: block; object-fit: cover; }
+    .no-image { min-height: 350px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.15); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .header-center { display: none; }
+      main { padding: 3rem 1.5rem; }
+      .about-section { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-heading { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html">Alex Shevtsov</a>
+    </div>
+    <div class="header-center"><svg width="94" height="36" viewBox="0 0 94 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.48596 17.943L7.48596 18.057L26.2584 23.6392L26.2584 12.3608L7.48596 17.943ZM9.81016e-07 22.443L5.92594e-07 13.557L41 1.07442e-06L41 7.97469L33.0534 10.3101L33.0534 25.6899L41 28.0253L41 36L9.81016e-07 22.443Z" fill="white"/><path d="M80.8584 28.7484C82.9731 27.3591 84.5214 25.6591 85.5033 23.6484C86.4851 21.6011 86.976 19.371 86.976 16.9581C86.976 16.0806 86.9005 15.1484 86.7495 14.1613C86.5606 13.1742 86.2774 12.2785 85.8998 11.4742C85.4844 10.6699 84.9557 10.0118 84.3137 9.5C83.634 8.95162 82.8032 8.67743 81.8213 8.67743C81.0283 8.67743 80.3675 8.86022 79.8388 9.22581C79.3101 9.55484 78.8569 10.0667 78.4793 10.7613C78.0639 11.4559 77.7052 12.2968 77.403 13.2839C77.1009 14.271 76.7988 15.4226 76.4967 16.7387L75.4771 21.071C75.0995 22.643 74.6463 24.1419 74.1176 25.5677C73.589 26.957 72.9092 28.2 72.0784 29.2968C71.2099 30.357 70.1525 31.2161 68.9063 31.8742C67.6224 32.4957 66.0552 32.8065 64.2048 32.8065C62.0901 32.8065 60.2397 32.3677 58.6536 31.4903C57.0675 30.5763 55.7647 29.4065 54.7451 27.9806C53.6877 26.5548 52.9136 24.9462 52.4227 23.1548C51.894 21.3269 51.6296 19.4989 51.6296 17.671C51.6296 14.3075 52.2905 11.2731 53.6122 8.56775C54.8962 5.82581 56.9354 3.43119 59.7298 1.38388L64.488 7.47097C62.6376 8.42151 61.2026 9.7742 60.183 11.529C59.1634 13.2473 58.6536 15.3129 58.6536 17.7258C58.6536 19.8462 59.0501 21.6194 59.8431 23.0452C60.5984 24.4344 61.6935 25.129 63.1285 25.129C63.9593 25.129 64.658 24.928 65.2244 24.5258C65.7531 24.0871 66.2062 23.5022 66.5839 22.771C66.9615 22.0032 67.2825 21.1441 67.5468 20.1936C67.7734 19.2065 68.0189 18.1645 68.2832 17.0677L69.3595 12.2968C69.6993 10.8344 70.1336 9.42689 70.6623 8.0742C71.1532 6.72151 71.833 5.53334 72.7015 4.50968C73.5323 3.44947 74.6086 2.60861 75.9303 1.9871C77.2142 1.32904 78.8192 1.00001 80.7451 1.00001C83.1997 1.00001 85.2767 1.51183 86.976 2.53549C88.6754 3.55915 90.0537 4.89355 91.1111 6.53871C92.1307 8.14732 92.8671 9.97527 93.3203 12.0226C93.7734 14.0699 94 16.0989 94 18.1097C94 19.7183 93.8112 21.3269 93.4336 22.9355C93.0937 24.5441 92.565 26.0979 91.8475 27.5968C91.13 29.0591 90.2426 30.4301 89.1852 31.7097C88.1278 32.9892 86.9005 34.086 85.5033 35L80.8584 28.7484ZM50.1569 14.1065L50.1569 20.2484L42 26.1161L42 21.071L46.9281 17.1774L42 13.2839L42 8.23872L50.1569 14.1065Z" fill="white"/></svg>
+</div>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="nav-overlay">
+    <nav>
+      <a href="index.html">Gallery</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+    <div class="nav-icons">
+      <a href="https://www.instagram.com/afoxrunningbytheedgeofthesea/" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
+          <circle cx="17.5" cy="6.5" r="1.5"></circle>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+
+  <main>
+    <section class="about-section">
+      <div>
+        <h1 class="about-heading">About</h1>
+        <div class="about-text">
+          <p>Alex Shevtsov is a contemporary artist working at the intersection of urban landscapes and geometric abstraction. His vibrant paintings explore the tension between architectural forms and organic energy, creating visual narratives that pull the viewer into kaleidoscopic cityscapes.</p>
+        </div>
+      </div>
+      <div class="about-image">
+        <div class="no-image"></div>
+      </div>
+    </section>
+  </main>
+  
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navOverlay = document.querySelector('.nav-overlay');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+    });
+    navOverlay.addEventListener('click', (e) => {
+      if (e.target === navOverlay) {
+        hamburger.classList.remove('active');
+        navOverlay.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
