@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Alex Shevtsov</title>
+  <title>Photos — Alex Shevtsov</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -38,11 +38,12 @@
       grid-row: 1;
       display: grid;
       grid-template-columns: subgrid;
-      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: 1fr;
       min-height: 100vh;
       padding-top: 5rem;
       padding-bottom: 4rem;
       row-gap: 5rem;
+      align-items: center;
     }
 
     .sidebar {
@@ -197,61 +198,6 @@
       display: none;
     }
 
-    /* About page specific styles */
-    .about-page-container {
-      grid-column: 1 / 7;
-      display: grid;
-      grid-template-columns: subgrid;
-    }
-
-    .about-page-photo {
-      grid-column: 1 / 4;
-      height: 400px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 16px;
-    }
-
-    .about-page-bio {
-      grid-column: 4 / 7;
-      font-size: 18px;
-      line-height: 1.6;
-      color: #ffffff;
-    }
-
-    .about-page-bio p {
-      margin-bottom: 1.5rem;
-    }
-
-    .about-page-bio p:last-child {
-      margin-bottom: 0;
-    }
-
-    .about-page-contacts {
-      grid-column: 1 / 7;
-      margin-top: 3rem;
-      padding-top: 3rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .about-page-contacts p {
-      font-size: 18px;
-      margin-bottom: 1rem;
-    }
-
-    .about-page-contacts a {
-      color: #ffffff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .about-page-contacts a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
     /* Tablet breakpoint */
     @media (max-width: 1024px) {
       .sidebar-decoration {
@@ -269,19 +215,6 @@
 
       .gallery {
         column-count: 1;
-      }
-
-      .about-page-photo {
-        grid-column: 1 / 7;
-      }
-
-      .about-page-bio {
-        grid-column: 1 / 7;
-        margin-top: 2rem;
-      }
-
-      .about-page-contacts {
-        grid-column: 1 / 7;
       }
     }
 
@@ -408,6 +341,7 @@
         display: none;
       }
 
+
       .about-text {
         font-size: 16px;
       }
@@ -430,27 +364,6 @@
 
       .gallery-item {
         margin-bottom: 1rem;
-      }
-
-      .about-page-container {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .about-page-photo {
-        grid-column: unset;
-        width: 100%;
-      }
-
-      .about-page-bio {
-        grid-column: unset;
-        width: 100%;
-        margin-top: 2rem;
-      }
-
-      .about-page-contacts {
-        grid-column: unset;
-        width: 100%;
       }
     }
   </style>
@@ -480,8 +393,8 @@
     </button>
     <nav class="mobile-menu-nav">
       <a href="index.html">Paintings</a>
-      <a href="photos.html">Photos</a>
-      <a href="about.html" class="active">About</a>
+      <a href="photos.html" class="active">Photos</a>
+      <a href="about.html">About</a>
     </nav>
     <div class="mobile-menu-social">
       <a href="https://www.instagram.com/afoxrunningbytheedgeofthesea/" target="_blank" aria-label="Instagram">
@@ -496,19 +409,7 @@
 
   <div class="page-layout">
     <main class="main-content">
-      <div class="about-page-container">
-        <div class="about-page-photo">Photo</div>
-        <div class="about-page-bio">
-          <p>Alex Shevtsov is a visual artist working at the intersection of painting and digital media. With a background in history and a deep interest in visual culture, Alex explores the temporal dimensions of image-making—how we perceive, remember, and archive visual experiences across time.</p>
-          <p>Their practice bridges traditional painting techniques with contemporary digital tools, creating works that challenge conventional boundaries between analog and digital mediums. Each project investigates how different materials and processes can reveal new meanings within familiar visual language.</p>
-          <p>Based in Vienna, Alex continues to develop projects that examine the relationship between historical contexts, technological possibilities, and personal observation.</p>
-          <p>For commissions, collaborations, or inquiries, please reach out directly.</p>
-        </div>
-        <div class="about-page-contacts">
-          <p>Email: <a href="mailto:hello@alexshevtsov.com">hello@alexshevtsov.com</a></p>
-          <p>Instagram: <a href="https://www.instagram.com/afoxrunningbytheedgeofthesea/" target="_blank">@afoxrunningbytheedgeofthesea</a></p>
-        </div>
-      </div>
+      <div class="about-text">Coming soon</div>
     </main>
 
     <aside class="sidebar">
@@ -516,8 +417,8 @@
       <div class="sidebar-decoration"></div>
       <nav class="sidebar-nav">
         <a href="index.html">Paintings</a>
-        <a href="photos.html">Photos</a>
-        <a href="about.html" class="active">About</a>
+        <a href="photos.html" class="active">Photos</a>
+        <a href="about.html">About</a>
       </nav>
       <div class="sidebar-social">
         <a href="https://www.instagram.com/afoxrunningbytheedgeofthesea/" target="_blank" aria-label="Instagram">

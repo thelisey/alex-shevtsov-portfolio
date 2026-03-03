@@ -100,6 +100,21 @@
       color: #ffffff;
     }
 
+    .sidebar-nav a.active {
+      position: relative;
+    }
+
+    .sidebar-nav a.active::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #ffffff;
+      border-radius: 50%;
+      margin-left: 0.5em;
+      vertical-align: middle;
+    }
+
     .sidebar-social {
       margin-top: 2rem;
     }
@@ -375,8 +390,8 @@
       <span></span>
     </button>
     <nav class="mobile-menu-nav">
-      <a href="#">Paintings</a>
-      <a href="#">Photos</a>
+      <a href="index.html">Paintings</a>
+      <a href="photos.html">Photos</a>
       <a href="about.html">About</a>
     </nav>
     <div class="mobile-menu-social">
@@ -520,8 +535,8 @@
       <div class="sidebar-name">Alex<br>Shevtsov</div>
       <div class="sidebar-decoration"></div>
       <nav class="sidebar-nav">
-        <a href="#">Paintings</a>
-        <a href="#">Photos</a>
+        <a href="index.html" class="active">Paintings</a>
+        <a href="photos.html">Photos</a>
         <a href="about.html">About</a>
         <div class="sidebar-social">
           <a href="https://www.instagram.com/afoxrunningbytheedgeofthesea/" target="_blank" aria-label="Instagram">
