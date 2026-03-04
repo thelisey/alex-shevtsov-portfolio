@@ -460,25 +460,36 @@
       });
     }
 
-    // Load gallery from JSON
-    fetch('gallery.json')
-      .then(r => r.json())
-      .then(items => {
-        const gallery = document.querySelector('.gallery');
-        items.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'gallery-item' + (item.featured ? ' featured' : '');
-          
-          if (item.type === 'video') {
-            div.innerHTML = `<video autoplay loop muted playsinline><source src="${item.src}" type="video/mp4"></video>`;
-          } else {
-            div.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
-          }
-          
-          gallery.appendChild(div);
-        });
-      })
-      .catch(err => console.error('Failed to load gallery:', err));
+    // Load gallery from JSON (check localStorage preview first, then fall back to file)
+    function renderGallery(items) {
+      const gallery = document.querySelector('.gallery');
+      gallery.innerHTML = '';
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item' + (item.featured ? ' featured' : '');
+
+        if (item.type === 'video') {
+          div.innerHTML = `<video autoplay loop muted playsinline><source src="${item.src}" type="video/mp4"></video>`;
+        } else {
+          div.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
+        }
+
+        gallery.appendChild(div);
+      });
+    }
+
+    // Try localStorage first (set by admin panel), then gallery.json
+    let previewData = null;
+    try { previewData = JSON.parse(localStorage.getItem('gallery_preview')); } catch(e) {}
+
+    if (previewData && previewData.length) {
+      renderGallery(previewData);
+    } else {
+      fetch('gallery.json')
+        .then(r => r.json())
+        .then(items => renderGallery(items))
+        .catch(err => console.error('Failed to load gallery:', err));
+    }
   </script>
 
 </body>
