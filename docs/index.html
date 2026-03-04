@@ -469,7 +469,7 @@
         div.className = 'gallery-item' + (item.featured ? ' featured' : '');
 
         if (item.type === 'video') {
-          div.innerHTML = `<video autoplay loop muted playsinline><source src="${item.src}" type="video/mp4"></video>`;
+          div.innerHTML = `<video autoplay loop muted playsinline src="${item.src}"></video>`;
         } else {
           div.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
         }
