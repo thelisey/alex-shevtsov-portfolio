@@ -188,8 +188,10 @@
 
     .gallery-item video {
       width: 100%;
-      height: auto;
       display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #0a0140;
     }
 
     /* Tablet breakpoint */
@@ -460,7 +462,7 @@
       });
     }
 
-    // Load gallery from JSON (check localStorage preview first, then fall back to file)
+    // Load gallery from JSON
     function renderGallery(items) {
       const gallery = document.querySelector('.gallery');
       gallery.innerHTML = '';
@@ -478,18 +480,11 @@
       });
     }
 
-    // Try localStorage first (set by admin panel), then gallery.json
-    let previewData = null;
-    try { previewData = JSON.parse(localStorage.getItem('gallery_preview')); } catch(e) {}
-
-    if (previewData && previewData.length) {
-      renderGallery(previewData);
-    } else {
-      fetch('gallery.json')
-        .then(r => r.json())
-        .then(items => renderGallery(items))
-        .catch(err => console.error('Failed to load gallery:', err));
-    }
+    // Always load from gallery.json (localStorage is only for admin preview)
+    fetch('gallery.json')
+      .then(r => r.json())
+      .then(items => renderGallery(items))
+      .catch(err => console.error('Failed to load gallery:', err));
   </script>
 
 </body>
