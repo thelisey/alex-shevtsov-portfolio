@@ -560,13 +560,21 @@
                 <input type="text" id="addTitle" placeholder="e.g. Untitled XVIII">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="fileUploadGroup">
                 <label>File</label>
                 <div class="upload-zone" id="uploadZone" onclick="document.getElementById('addFile').click()">
                     <div class="upload-zone-icon">&#8593;</div>
                     <div class="upload-zone-text" id="uploadText">Click to select image (JPG, PNG, WebP)</div>
                     <div class="upload-zone-filename" id="uploadFilename"></div>
                     <input type="file" id="addFile" accept="image/*" onchange="handleFileSelect(event)">
+                </div>
+            </div>
+
+            <div class="form-group" id="videoPathGroup" style="display:none">
+                <label>Video filename</label>
+                <input type="text" id="addVideoPath" placeholder="e.g. my_video.mp4">
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-top:0.5rem;">
+                    Put the .mp4 file in <code style="background:rgba(255,255,255,0.1);padding:0.1rem 0.3rem;border-radius:3px;">uploads/works/</code> folder and enter the filename here
                 </div>
             </div>
 
@@ -680,7 +688,11 @@
 
             let thumbnailHTML;
             if (isVideo) {
-                thumbnailHTML = `<div class="card-thumbnail video"><div class="video-badge">▶</div></div>`;
+                const videoSrc = item.src && !item.src.startsWith('data:') ? item.src : '';
+                thumbnailHTML = `<div class="card-thumbnail video">
+                    ${videoSrc ? `<video src="${videoSrc}" muted style="width:100%;height:100%;object-fit:cover;"></video>` : ''}
+                    <div class="video-badge">▶</div>
+                </div>`;
             } else {
                 thumbnailHTML = `<div class="card-thumbnail"><img src="${item.src}" alt="${escapeHTML(item.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\\'color:rgba(255,255,255,0.3);font-size:0.8rem\\'>No preview</div>'"></div>`;
             }
@@ -781,6 +793,7 @@
             pendingFileData = null;
             document.getElementById('addTitle').value = '';
             document.getElementById('addFile').value = '';
+            document.getElementById('addVideoPath').value = '';
             document.getElementById('uploadFilename').textContent = '';
             document.getElementById('uploadZone').classList.remove('has-file');
             updateUploadZone();
@@ -793,16 +806,15 @@
 
         function updateUploadZone() {
             const type = document.getElementById('addType').value;
-            const uploadText = document.getElementById('uploadText');
-            const addFile = document.getElementById('addFile');
+            const fileUploadGroup = document.getElementById('fileUploadGroup');
             const videoPathGroup = document.getElementById('videoPathGroup');
 
             if (type === 'video') {
-                uploadText.textContent = 'Click to select video (MP4)';
-                addFile.accept = 'video/mp4';
+                fileUploadGroup.style.display = 'none';
+                videoPathGroup.style.display = 'block';
             } else {
-                uploadText.textContent = 'Click to select image (JPG, PNG, WebP)';
-                addFile.accept = 'image/*';
+                fileUploadGroup.style.display = 'block';
+                videoPathGroup.style.display = 'none';
             }
         }
 
@@ -833,11 +845,20 @@
             const title = document.getElementById('addTitle').value.trim() || 'Untitled';
             let src = '';
 
-            if (!pendingFileData) {
-                showStatus('Please select a file', 'error');
-                return;
+            if (type === 'video') {
+                const videoFilename = document.getElementById('addVideoPath').value.trim();
+                if (!videoFilename) {
+                    showStatus('Enter the video filename', 'error');
+                    return;
+                }
+                src = 'uploads/works/' + videoFilename;
+            } else {
+                if (!pendingFileData) {
+                    showStatus('Please select an image', 'error');
+                    return;
+                }
+                src = pendingFileData;
             }
-            src = pendingFileData;
 
             const newItem = {
                 id: String(Date.now()),
@@ -857,7 +878,17 @@
         // ---- Sync & Save ----
 
         function syncToLocalStorage() {
-            try { localStorage.setItem('gallery_preview', JSON.stringify(galleryItems)); } catch(e) {}
+            try {
+                const json = JSON.stringify(galleryItems);
+                // Check size before storing (~5MB localStorage limit)
+                if (json.length > 4 * 1024 * 1024) {
+                    console.warn('Gallery data too large for localStorage preview (' + Math.round(json.length/1024/1024) + 'MB). Use Save + deploy instead.');
+                    return;
+                }
+                localStorage.setItem('gallery_preview', json);
+            } catch(e) {
+                console.warn('localStorage sync failed:', e.message);
+            }
         }
 
         function saveGallery() {
