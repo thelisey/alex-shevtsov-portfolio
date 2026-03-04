@@ -354,6 +354,7 @@
                 }
                 galleryItems = await response.json();
                 renderGallery();
+                syncToLocalStorage();
                 showStatus('Gallery loaded successfully', 'success');
             } catch (error) {
                 showStatus('Could not load gallery.json automatically. Please use "Load JSON" button to import it.', 'info');
@@ -503,12 +504,23 @@
 
             this.classList.remove('drag-over');
             renderGallery();
+            syncToLocalStorage();
         }
 
         // Toggle featured state
         function toggleFeatured(index) {
             galleryItems[index].featured = !galleryItems[index].featured;
             renderGallery();
+            syncToLocalStorage();
+        }
+
+        // Sync current state to localStorage for live preview
+        function syncToLocalStorage() {
+            try {
+                localStorage.setItem('gallery_preview', JSON.stringify(galleryItems));
+            } catch (e) {
+                // localStorage may be unavailable
+            }
         }
 
         // Save gallery to JSON file
